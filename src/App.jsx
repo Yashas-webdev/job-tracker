@@ -28,5 +28,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem('jobTrackerJobs', JSON.stringify(jobs));
   }, [jobs]);
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 }
 export default App

@@ -37,5 +37,27 @@ function App() {
       [name]: value
     }));
   };
+
+  // Handle form submission (add or update job)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (editingId) {
+      // Update existing job
+      setJobs(jobs.map(job =>
+        job.id === editingId
+          ? { ...formData, id: editingId }
+          : job
+      ));
+      setEditingId(null);
+    } else {
+      // Add new job
+      const newJob = {
+        ...formData,
+        id: Date.now()
+      };
+      setJobs([newJob, ...jobs]);
+    }
+}
 }
 export default App

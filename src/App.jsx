@@ -59,5 +59,19 @@ function App() {
       setJobs([newJob, ...jobs]);
     }
 }
-}
+
+// Reset form to initial values
+    setFormData({
+      company: '',
+      position: '',
+      location: '',
+      status: 'applied',
+      appliedDate: new Date().toISOString().split('T')[0],
+      salary: '',
+      notes: ''
+    });
+
+
+  
+  };
 export default App

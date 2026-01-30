@@ -71,6 +71,19 @@ function App() {
       notes: ''
     });
 
+    // Handle editing a job
+  const handleEdit = (job) => {
+    setFormData(job);
+    setEditingId(job.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Handle deleting a job
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this job application?')) {
+      setJobs(jobs.filter(job => job.id !== id));
+    }
+  };
 
   
   };

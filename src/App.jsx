@@ -85,6 +85,28 @@ function App() {
     }
   };
 
+  // Calculate statistics
+  const stats = {
+    total: jobs.length,
+    applied: jobs.filter(j => j.status === 'applied').length,
+    interview: jobs.filter(j => j.status === 'interview').length,
+    offer: jobs.filter(j => j.status === 'offer').length,
+    rejected: jobs.filter(j => j.status === 'rejected').length
+  };
+
+  // Filter jobs based on status and search query
+  const filteredJobs = jobs.filter(job => {
+    // Check if job matches selected filter
+    const matchesFilter = filter === 'all' || job.status === filter;
+
+    // Check if job matches search query
+    const matchesSearch = searchQuery === '' ||
+      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.position.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesFilter && matchesSearch;
+  });
+
   
   };
 export default App

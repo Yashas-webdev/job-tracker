@@ -107,6 +107,43 @@ function App() {
     return matchesFilter && matchesSearch;
   });
 
-  
   };
+
+  // Render UI
+  return (
+    <div className="container">
+
+      {/* Header Section */}
+      <header>
+        <h1>🎯 Job Tracker</h1>
+        <p className="subtitle">Manage your job applications with ease</p>
+      </header>
+
+      {/* Statistics Dashboard */}
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-label">Total Applications</div>
+          <div className="stat-value">{stats.total}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Applied</div>
+          <div className="stat-value">{stats.applied}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Interviews</div>
+          <div className="stat-value">{stats.interview}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Offers</div>
+          <div className="stat-value">{stats.offer}</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">Rejected</div>
+          <div className="stat-value">{stats.rejected}</div>
+        </div>
+      </div>
+      </div>
+  )
+  
+
 export default App

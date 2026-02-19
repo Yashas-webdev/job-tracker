@@ -18,6 +18,25 @@ function Filters({ filter, setFilter, searchQuery, setSearchQuery, stats }) {
         Applied ({stats.applied})
       </button>
 
+    
+      {/* Interview Button */}
+      <button
+        className={`filter-btn ${filter === 'interview' ? 'active' : ''}`}
+        onClick={() => setFilter('interview')}
+      >
+        Interview ({stats.interview})
+      </button>
+
+    
+      {/* Offer Button */}
+      <button
+        className={`filter-btn ${filter === 'offer' ? 'active' : ''}`}
+        onClick={() => setFilter('offer')}
+      >
+        Offer ({stats.offer})
+      </button>
+
+     
     </div>
   );
 }

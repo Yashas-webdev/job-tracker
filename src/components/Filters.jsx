@@ -36,7 +36,15 @@ function Filters({ filter, setFilter, searchQuery, setSearchQuery, stats }) {
         Offer ({stats.offer})
       </button>
 
-     
+      {/* Rejected Button */}
+      <button
+        className={`filter-btn ${filter === 'rejected' ? 'active' : ''}`}
+        onClick={() => setFilter('rejected')}
+      >
+        Rejected ({stats.rejected})
+      </button>
+
+      
     </div>
   );
 }

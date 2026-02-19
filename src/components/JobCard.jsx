@@ -29,7 +29,18 @@ function JobCard({ job, handleEdit, handleDelete }) {
         )}
       </div>
 
-      
+      {/* Job Notes */}
+      {job.notes && (
+        <div className="job-notes">{job.notes}</div>
+      )}
+
+      {/* Status Badge */}
+      <div style={{marginBottom: '1rem'}}>
+        <span className={`status-badge status-${job.status}`}>
+          {job.status}
+        </span>
+      </div>
+
     
     </div>
   );

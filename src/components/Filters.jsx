@@ -44,7 +44,14 @@ function Filters({ filter, setFilter, searchQuery, setSearchQuery, stats }) {
         Rejected ({stats.rejected})
       </button>
 
-      
+      {/* Search Box */}
+      <input
+        type="text"
+        className="search-box"
+        placeholder="🔍 Search company or position..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
     </div>
   );
 }

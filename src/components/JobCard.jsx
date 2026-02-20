@@ -40,7 +40,23 @@ function JobCard({ job, handleEdit, handleDelete }) {
           {job.status}
         </span>
       </div>
-
+    
+    
+      {/* Action Buttons */}
+      <div className="job-actions">
+        <button
+          className="btn-secondary btn-small"
+          onClick={() => handleEdit(job)}
+        >
+          ✏️ Edit
+        </button>
+        <button
+          className="btn-danger btn-small"
+          onClick={() => handleDelete(job.id)}
+        >
+          🗑️ Delete
+        </button>
+      </div>
     
     </div>
   );

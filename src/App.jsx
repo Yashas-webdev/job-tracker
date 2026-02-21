@@ -20,5 +20,12 @@ function App(){
     salary: '',
     notes: ''
   });
+
+  useEffect(()=>{
+    const savedJobs = localStorage.getItem('jobTracker Jobs');
+    if(savedJobs){
+      setJobs(JSON.parse(savedJobs));
+    }
+  })
 }
 

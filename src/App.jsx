@@ -34,6 +34,24 @@ function App(){
 
   const handleInputChange = (e) => {
     const {name,value} = e.target;
+    setFromData(prev => ({
+      ...prev,[name]:value
+    }));
+  };
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+
+    if(editingID){
+      setJobs(jobs.map(job=>
+        job.id === editingID ? {...formData, id:editingID} : job
+      ));
+      setEditingId(null);
+    }else{
+      const newJob = {
+        
+      }
+    }
   }
 }
 

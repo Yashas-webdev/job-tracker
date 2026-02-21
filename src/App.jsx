@@ -10,6 +10,15 @@ function App(){
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const [editingID, setEditingId] = useState(null);
+  const [formData, setFromData] = useState({
+    company: '',
+    positon: '',
+    location: '',
+    status: '',
+    appliedDate: new Date().toISOString().split('T')[0],
+    salary: '',
+    notes: ''
+  });
 }
 

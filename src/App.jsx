@@ -26,6 +26,14 @@ function App(){
     if(savedJobs){
       setJobs(JSON.parse(savedJobs));
     }
-  })
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem('jobTrackerJobs',JSON.stringify(jobs));
+  },[jobs]);
+
+  const handleInputChange = (e) => {
+    const {name,value} = e.target;
+  }
 }
 

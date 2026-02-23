@@ -49,9 +49,22 @@ function App(){
       setEditingId(null);
     }else{
       const newJob = {
-        
-      }
-    }
+        ...formData,
+        id: Date.now()
+      };
+      setJobs([newJob,...jobs]);
+    };
+    setJobs([newJob, ...jobs]);
   }
+
+  setFromData({
+    company: '',
+    positon:'',
+    location:'',
+    status:'applied',
+    appliedDate: new Date().toISOString().split('T')[0],
+    salary:'',
+    notes:''
+  })
 }
 

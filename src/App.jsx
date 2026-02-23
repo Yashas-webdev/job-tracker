@@ -79,5 +79,21 @@ function App(){
     setJobs(jobs.filter(job => job.id != id));
   }
  };
+
+ const stats = {
+  total: jobs.length,
+  applied: jobs.filter(j=>j.status === 'applied').length,
+  interview: jobs.filter(j => j.status === 'interview').length,
+  offer: jobs.filter(j =>j.status === 'offer').length,
+  rejected:jobs.filter(j => j.status === 'rejected').length
+ };
+
+ const filteredJobs = jobs.filter(job => {
+  const matchesFilter = filter === 'all' || job.status === filter;
+  const matchesSearch = searchQuery === ''|| job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  job.positon.toLowerCase().includes(searchQuery.toLowerCase());
+return matchesFilter && matchesSearch;
+ });
+
 }
 

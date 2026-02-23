@@ -52,8 +52,8 @@ function App(){
         ...formData,
         id: Date.now()
       };
-      setJobs([newJob,...jobs]);
-    };
+    
+   
     setJobs([newJob, ...jobs]);
   }
 
@@ -65,6 +65,19 @@ function App(){
     appliedDate: new Date().toISOString().split('T')[0],
     salary:'',
     notes:''
-  })
+  });
+ };
+
+ const handleEdit = (job) => {
+  setFromData(job);
+  setEditingId(job.id);
+  window.scrollTo({top:0,behavior:'smooth'});
+ };
+
+ const handleDelete = (id) =>{
+  if(window.confirm('Are you sure you want to delete this job application?')){
+    setJobs(jobs.filter(job => job.id != id));
+  }
+ };
 }
 

@@ -115,6 +115,29 @@ return matchesFilter && matchesSearch;
         setSearchQuery={setSearchQuery}
         stats={stats}
       />
+
+      {filteredJobs.length === 0 ? (
+        <div className='empty-state'>
+          <div className='empty-state-icon'>📪</div>
+          <h3>No applications found</h3>
+          <p>
+            {jobs.lenth === 0 
+            ? "Start tracking your job applications by adding one above!"
+          : "Try adjusting your filters or serach query"}
+          </p>
+          </div>
+          ) : (
+            <div className = 'jobs-grid'>
+              {filteredJobs.map(job => (
+                <JobCard
+                  key = {job.id}
+                  job = {job}
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  />
+              ))}
+              </div>
+          )}
     </div>
   )
 }

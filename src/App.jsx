@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import StatsGrid from './components/StatsGrid';
 import JobForm from './components/JobForm';
-import Filters from './components/JobCard';
+import Filters from './components/Filters';
 import JobCard from './components/JobCard';
 import './App.css';
 
@@ -10,10 +10,10 @@ function App(){
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('');
-  const [editingID, setEditingId] = useState(null);
-  const [formData, setFromData] = useState({
+  const [editingId, setEditingId] = useState(null);
+  const [formData, setFormData] = useState({
     company: '',
-    positon: '',
+    position: '',
     location: '',
     status: '',
     appliedDate: new Date().toISOString().split('T')[0],
@@ -22,7 +22,7 @@ function App(){
   });
 
   useEffect(()=>{
-    const savedJobs = localStorage.getItem('jobTracker Jobs');
+    const savedJobs = localStorage.getItem('jobTrackerJobs');
     if(savedJobs){
       setJobs(JSON.parse(savedJobs));
     }
@@ -34,7 +34,7 @@ function App(){
 
   const handleInputChange = (e) => {
     const {name,value} = e.target;
-    setFromData(prev => ({
+    setFormData(prev => ({
       ...prev,[name]:value
     }));
   };
@@ -42,9 +42,9 @@ function App(){
   const handleSubmit = (e) =>{
     e.preventDefault();
 
-    if(editingID){
+    if(editingId){
       setJobs(jobs.map(job=>
-        job.id === editingID ? {...formData, id:editingID} : job
+        job.id === editingId? {...formData, id:editingID} : job
       ));
       setEditingId(null);
     }else{
@@ -57,9 +57,9 @@ function App(){
     setJobs([newJob, ...jobs]);
   }
 
-  setFromData({
+  setFormData({
     company: '',
-    positon:'',
+    position:'',
     location:'',
     status:'applied',
     appliedDate: new Date().toISOString().split('T')[0],
@@ -69,14 +69,14 @@ function App(){
  };
 
  const handleEdit = (job) => {
-  setFromData(job);
+  setFormData(job);
   setEditingId(job.id);
   window.scrollTo({top:0,behavior:'smooth'});
  };
 
  const handleDelete = (id) =>{
   if(window.confirm('Are you sure you want to delete this job application?')){
-    setJobs(jobs.filter(job => job.id != id));
+    setJobs(jobs.filter(job => job.id !== id));
   }
  };
 
@@ -91,7 +91,7 @@ function App(){
  const filteredJobs = jobs.filter(job => {
   const matchesFilter = filter === 'all' || job.status === filter;
   const matchesSearch = searchQuery === ''|| job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  job.positon.toLowerCase().includes(searchQuery.toLowerCase());
+  job.position.toLowerCase().includes(searchQuery.toLowerCase());
 return matchesFilter && matchesSearch;
  });
 
@@ -103,10 +103,9 @@ return matchesFilter && matchesSearch;
         formData={formData}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
-        editingId={editingID}
+        editingId={editingId}
         setEditingId={setEditingId}
-        setFormData={setFormData}
-    />
+      />
       
       <Filters
         filter={filter}
@@ -121,9 +120,9 @@ return matchesFilter && matchesSearch;
           <div className='empty-state-icon'>📪</div>
           <h3>No applications found</h3>
           <p>
-            {jobs.lenth === 0 
+            {jobs.length === 0 
             ? "Start tracking your job applications by adding one above!"
-          : "Try adjusting your filters or serach query"}
+          : "Try adjusting your filters or search query"}
           </p>
           </div>
           ) : (
@@ -141,4 +140,6 @@ return matchesFilter && matchesSearch;
     </div>
   )
 }
+
+export default App;
 

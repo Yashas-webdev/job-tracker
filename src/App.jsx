@@ -95,5 +95,27 @@ function App(){
 return matchesFilter && matchesSearch;
  });
 
+  return (
+    <div className='container'>
+      <Header/>
+      <StatsGrid stats={stats}/>
+      <JobForm
+        formData={formData}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+        editingId={editingID}
+        setEditingId={setEditingId}
+        setFormData={setFormData}
+    />
+      
+      <Filters
+        filter={filter}
+        setFilter={setFilter}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        stats={stats}
+      />
+    </div>
+  )
 }
 

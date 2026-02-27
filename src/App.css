@@ -230,3 +230,32 @@ button {
   background: #cc0044;
   transform: translateY(-2px);
 }
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease 0.5s backwards;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: var(--primary);
+  border-color: var(--accent);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+}

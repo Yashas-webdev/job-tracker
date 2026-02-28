@@ -13,18 +13,22 @@
   --border: rgba(255, 255, 255, 0.1); 
 } 
 
-* {
+*css* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--primary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background-attachment: fixed;
 }
 
 body::before {
@@ -47,9 +51,9 @@ body::before {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 4rem;
 }
 
 header {
@@ -77,10 +81,28 @@ h1 {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
   margin-bottom: 3rem;
   animation: fadeInUp 0.6s ease 0.2s backwards;
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat-card {
@@ -328,3 +350,32 @@ button {
   line-height: 1.5;
 }
 
+.job-card-actions {
+  display: flex;
+  gap: 1rem; /* This adds space between buttons */
+}
+
+/* Or if the buttons are direct children */
+.job-card button + button {
+  margin-left: 12.8rem;
+}
+
+.status-applied {
+  background: rgba(0, 217, 255, 0.2);
+  color: var(--accent);
+}
+
+.status-interview {
+  background: rgba(255, 184, 0, 0.2);
+  color: var(--warning);
+}
+
+.status-offer {
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--success);
+}
+
+.status-rejected {
+  background: rgba(255, 0, 85, 0.2);
+  color: var(--danger);
+}

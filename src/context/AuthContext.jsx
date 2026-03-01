@@ -28,3 +28,44 @@ useInsertionEffect(()=>{
     }
     setLoading(false);
 },[]);
+
+const signUp = (userData) => {
+    const users = JSON.parse(localStorage.getItem('jobTrackerUsers') || '[]');
+
+    if (users.find(u => u.email === userData.email)){
+        throw new Error('Email already exists');
+    }
+
+
+const newUser = {
+    id: Date.now(),
+    ...userData,
+    createAt: new Date().toISOString(),
+    profilePicture: null,
+    preference: {
+        emailNotifications: true,
+        reminderTime : '09:00',
+        theme : 'dark'
+    }
+};
+
+users.push(newUser);
+localStorage.setItem('jobTrackerUsers',JSON.stringify(users));
+localStorage.setItem('jobTrackerUser',JSON.stringify(newUser));
+setUser(newUser);
+
+return newUser;
+
+}
+
+const value = {
+    user,
+    loading,
+    singUp,
+    signIn,
+    logout,
+    updateProfile,
+    isAuthenticated: !!user
+};
+
+return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

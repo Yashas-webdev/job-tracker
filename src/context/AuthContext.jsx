@@ -81,4 +81,9 @@ const signIn = (email,password) =>{
     localStorage.setItem('jobTrackerUser', JSON.stringify(user));
     setUser(user);
     return user;
-}
+};
+
+const logout = () =>{
+    localStorage.removeItem('jobTrackerUser');
+    setUser(null);
+};

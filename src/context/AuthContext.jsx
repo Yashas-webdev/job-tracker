@@ -8,20 +8,20 @@ export const useAuth = () => {
         throw new Error('useAuth must be used within Authprovider');
     }
     return context;
-}
+};
 
-export const AuthProvider = ({children})
+export const AuthProvider = ({children}) =>{
 // all components wrapped inside <AuthProvider>
 // example : <AuthProvider>
                 //  <App/>      {//App is a 'child'}
                 // <Header/>    {//Header is a 'child'}
     //       </AuthProvider>
 
-const [uesr, setUser] = useState(null);
+const [user, setUser] = useState(null);
 const [loading, setLoading] = useState(true);
 
 
-useInsertionEffect(()=>{
+useEffect(()=>{
     const savedUser = localStorage.getItem('jobTrackerUser');
     if(savedUser){
         setUser(JSON.parse(savedUser));
@@ -40,9 +40,9 @@ const signUp = (userData) => {
 const newUser = {
     id: Date.now(),
     ...userData,
-    createAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
     profilePicture: null,
-    preference: {
+    preferences: {
         emailNotifications: true,
         reminderTime : '09:00',
         theme : 'dark'
@@ -56,19 +56,7 @@ setUser(newUser);
 
 return newUser;
 
-}
-
-const value = {
-    user,
-    loading,
-    singUp,
-    signIn,
-    logout,
-    updateProfile,
-    isAuthenticated: !!user
 };
-
-return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 
 const signIn = (email,password) =>{
     const users = JSON.parse(localStorage.getItem('jobTrackerUsers') || '[]');
@@ -86,4 +74,32 @@ const signIn = (email,password) =>{
 const logout = () =>{
     localStorage.removeItem('jobTrackerUser');
     setUser(null);
+};
+
+  const updateProfile = (updates) => {
+    const updatedUser = { ...user, ...updates };
+    
+    const users = JSON.parse(localStorage.getItem('jobTrackerUsers') || '[]');
+    const userIndex = users.findIndex(u => u.id === user.id);
+    
+    if (userIndex !== -1) {
+      users[userIndex] = updatedUser;
+      localStorage.setItem('jobTrackerUsers', JSON.stringify(users));
+    }
+    
+    localStorage.setItem('jobTrackerUser', JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
+
+  const value = {
+    user,
+    loading,
+    signUp,
+    signIn,
+    logout,
+    updateProfile,
+    isAuthenticated: !!user
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

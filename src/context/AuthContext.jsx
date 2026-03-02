@@ -69,3 +69,16 @@ const value = {
 };
 
 return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+
+const signIn = (email,password) =>{
+    const users = JSON.parse(localStorage.getItem('jobTrackerUsers') || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (!user){
+        throw new Error('Invalid email or password')
+    }
+
+    localStorage.setItem('jobTrackerUser', JSON.stringify(user));
+    setUser(user);
+    return user;
+}

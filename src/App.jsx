@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from './context/AuthContext'; 
 import Header from './components/Header';
 import StatsGrid from './components/StatsGrid';
 import JobForm from './components/JobForm';
@@ -7,6 +8,31 @@ import JobCard from './components/JobCard';
 import './App.css';
 
 function App(){
+  const { user, loading, isAuthenticated } = useAuth();
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner">⏳</div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  
+  if (!isAuthenticated) {
+    return (
+      <div className="auth-screen">
+        <div className="auth-message">
+          <h2>Welcome to Job Tracker! 🎯</h2>
+          <p>Please sign in or create an account to start tracking your applications.</p>
+          <div className="auth-buttons">
+            <button className="btn-primary">Sign In</button>
+            <button className="btn-secondary">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,15 +48,21 @@ function App(){
   });
 
   useEffect(()=>{
-    const savedJobs = localStorage.getItem('jobTrackerJobs');
+  if (user) {  // ✅ Only load jobs if user is logged in
+    const savedJobs = localStorage.getItem(`jobTrackerJobs_${user.id}`);  // ✅ User-specific key
     if(savedJobs){
       setJobs(JSON.parse(savedJobs));
     }
-  },[])
+  } else {
+    setJobs([]);  // ✅ Clear jobs if no user
+  }
+},[user])  // ✅ Re-run when user changes
 
   useEffect(()=>{
-    localStorage.setItem('jobTrackerJobs',JSON.stringify(jobs));
-  },[jobs]);
+    if (user) {
+      localStorage.setItem('jobTrackerJobs_${user.id}',JSON.stringify(jobs));
+    }
+  },[jobs,user]);
 
   const handleInputChange = (e) => {
     const {name,value} = e.target;

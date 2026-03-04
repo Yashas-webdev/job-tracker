@@ -27,7 +27,7 @@ useEffect(()=>{
         setUser(JSON.parse(savedUser));
     }
     setLoading(false);
-},[]);
+},[]);  // '[]' dependecny array, mounting phase
 
 const signUp = (userData) => {
     const users = JSON.parse(localStorage.getItem('jobTrackerUsers') || '[]');

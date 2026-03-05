@@ -11,7 +11,7 @@ export default function SignIn({onSwitchToSignUp}){
     const [error,setError] = useState('')
     const [loading, setLoading]= useState(false);
 
-    const handlechange = (e) =>{
+    const handleChange = (e) =>{
         const {name,value} = e.target;
         setFromData(prev => ({
             ...prev,

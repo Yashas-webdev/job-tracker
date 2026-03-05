@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './context/AuthContext'; 
+import AuthManager from './components/auth/AuthManager';
 import Header from './components/Header';
 import StatsGrid from './components/StatsGrid';
 import JobForm from './components/JobForm';
@@ -20,19 +21,10 @@ function App(){
 
   
   if (!isAuthenticated) {
-    return (
-      <div className="auth-screen">
-        <div className="auth-message">
-          <h2>Welcome to Job Tracker! 🎯</h2>
-          <p>Please sign in or create an account to start tracking your applications.</p>
-          <div className="auth-buttons">
-            <button className="btn-primary">Sign In</button>
-            <button className="btn-secondary">Sign Up</button>
-          </div>
-        </div>
-      </div>
-    );
+    return <AuthManager/>;
   }
+
+  
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('');

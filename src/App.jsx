@@ -10,21 +10,6 @@ import './App.css';
 
 function App(){
   const { user, loading, isAuthenticated } = useAuth();
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-spinner">⏳</div>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  
-  if (!isAuthenticated) {
-    return <AuthManager/>;
-  }
-
-  
   const [jobs, setJobs] = useState([]);
   const [filter, setFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,28 +18,29 @@ function App(){
     company: '',
     position: '',
     location: '',
-    status: '',
+    status: 'applied',
     appliedDate: new Date().toISOString().split('T')[0],
     salary: '',
     notes: ''
   });
-
+  
   useEffect(()=>{
-  if (user) {  // ✅ Only load jobs if user is logged in
-    const savedJobs = localStorage.getItem(`jobTrackerJobs_${user.id}`);  // ✅ User-specific key
-    if(savedJobs){
-      setJobs(JSON.parse(savedJobs));
+    if (user) {  // ✅ Only load jobs if user is logged in
+      const savedJobs = localStorage.getItem(`jobTrackerJobs_${user.id}`);  // ✅ User-specific key
+      if(savedJobs){
+        setJobs(JSON.parse(savedJobs));
+      }
+    } else {
+      setJobs([]);  // ✅ Clear jobs if no user
     }
-  } else {
-    setJobs([]);  // ✅ Clear jobs if no user
-  }
-},[user])  // ✅ Re-run when user changes
-
+  },[user])  // ✅ Re-run when user changes
+  
   useEffect(()=>{
     if (user) {
-      localStorage.setItem('jobTrackerJobs_${user.id}',JSON.stringify(jobs));
+      localStorage.setItem(`jobTrackerJobs_${user.id}`,JSON.stringify(jobs));
     }
   },[jobs,user]);
+  
 
   const handleInputChange = (e) => {
     const {name,value} = e.target;
@@ -68,7 +54,7 @@ function App(){
 
     if(editingId){
       setJobs(jobs.map(job=>
-        job.id === editingId? {...formData, id:editingID} : job
+        job.id === editingId? {...formData, id:editingId} : job
       ));
       setEditingId(null);
     }else{
@@ -118,6 +104,21 @@ function App(){
   job.position.toLowerCase().includes(searchQuery.toLowerCase());
 return matchesFilter && matchesSearch;
  });
+
+ 
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner">⏳</div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  
+  if (!isAuthenticated) {
+    return <AuthManager/>;
+  }
 
   return (
     <div className='container'>

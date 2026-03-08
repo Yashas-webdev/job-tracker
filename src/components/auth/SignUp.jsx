@@ -83,6 +83,21 @@ export default function SignUp({ onSwitchToSignIn }){
             </div>
 
             <div className="form-group">
+            <label>Email *</label>
+            <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="john@example.com"
+                disabled={loading}
+                autoComplete="email"
+            />
+            </div>
+
+
+            <div className="form-group">
                 <label>Phone</label>
                 <input
                   type="tel"

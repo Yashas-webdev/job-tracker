@@ -6,6 +6,7 @@ import StatsGrid from './components/StatsGrid';
 import JobForm from './components/JobForm';
 import Filters from './components/Filters';
 import JobCard from './components/JobCard';
+import toast from 'react-hot-toast'
 import './App.css';
 
 function App(){
@@ -57,6 +58,11 @@ function App(){
         job.id === editingId? {...formData, id:editingId} : job
       ));
       setEditingId(null);
+
+      toast.success('Job application updated successfully!',{
+        duration: 3000,
+        icon:'✏️'
+      })
     }else{
       const newJob = {
         ...formData,
@@ -65,6 +71,11 @@ function App(){
     
    
     setJobs([newJob, ...jobs]);
+
+    toast.success(`Added ${formData.company} - ${formData.position}!`,{
+      duration: 3000,
+      icon:'🎉',
+    } );
   }
 
   setFormData({
@@ -87,6 +98,11 @@ function App(){
  const handleDelete = (id) =>{
   if(window.confirm('Are you sure you want to delete this job application?')){
     setJobs(jobs.filter(job => job.id !== id));
+
+    toast.success(`Deleted ${jobToDelete.company} applicatoin`,{
+      duration: 3000,
+      icon:'🚮'
+    })
   }
  };
 

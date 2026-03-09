@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import toast from 'react-hot-toast'
 
 const AuthContext = createContext();
 
@@ -54,6 +55,11 @@ localStorage.setItem('jobTrackerUsers',JSON.stringify(users));
 localStorage.setItem('jobTrackerUser',JSON.stringify(newUser));
 setUser(newUser);
 
+toast.success(`Welcome, ${newUser.name}! 🎉`,{
+    duration: 4000,
+
+})
+
 return newUser;
 
 };
@@ -68,6 +74,10 @@ const signIn = (email,password) =>{
 
     localStorage.setItem('jobTrackerUser', JSON.stringify(user));
     setUser(user);
+
+    toast.success(`Welcome back, ${user.name}! 👋`,{
+        duration: 3000,
+    })
     return user;
 };
 

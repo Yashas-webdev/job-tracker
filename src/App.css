@@ -406,3 +406,34 @@ button {
   font-size: 1.2rem;
 }
 
+/* Toast Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Apply to react-hot-toast */
+[data-radix-toast-viewport] > div {
+  animation: slideInRight 0.3s ease-out;
+}
+
+[data-radix-toast-viewport] > div[data-state="closed"] {
+  animation: slideOutRight 0.2s ease-in;
+}

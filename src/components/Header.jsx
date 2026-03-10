@@ -1,10 +1,12 @@
 import { useAuth } from '../context/AuthContext';
 import { useState, useRef, useEffect } from 'react';
+import ConfirmModal from '../common/confirmModal'
 import './Header.css';
 
 export default function Header() {
   const { user, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -21,9 +23,8 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      logout();
-    }
+    setShowDropdown(false);
+    setShowLogoutModal(true);
   };
 
   const getInitials = (name) => {
@@ -34,6 +35,8 @@ export default function Header() {
       .toUpperCase()
       .slice(0, 2);
   };
+
+  
 
   return (
     <header>
@@ -98,6 +101,17 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      <ConfirmModal
+       isOpen = {showLogoutModal}
+       onClose={()=>setShowLogoutModal(false)}
+       onConfirm={confirmLogout}
+       title = 'Logout'
+       message = 'Are you sure you want to logout? Your data is saved and will be here when you return.'
+       confirmText = 'Logout'
+       cancelText = 'Stay'
+       type = 'warning'
+      />
     </header>
   );
 }

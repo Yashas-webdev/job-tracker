@@ -25,7 +25,9 @@ function App(){
     salary: '',
     notes: ''
   });
-  
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState(null);
+
   
   useEffect(()=>{
     if (user) {  // ✅ Only load jobs if user is logged in
@@ -180,6 +182,21 @@ return matchesFilter && matchesSearch;
               ))}
               </div>
           )}
+
+          <ConfirmModal
+          isOpen={showDeleteModal}
+          onClose={()=>{
+            setShowDeleteModal(false);
+            setJobToDelete(null);
+          }}
+
+          onConfirm={confirmDelte}
+          title = 'Delete Application'
+          message = {`Are you sure you want to delete the application for ${jobToDelete?.company || 'this company'}? This actiion cannot be undone.`}
+          confirmText='Delete'
+          cancelText='Cancel'
+          type='danger'
+          />
     </div>
   )
 }

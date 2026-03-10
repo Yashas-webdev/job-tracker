@@ -7,6 +7,7 @@ import JobForm from './components/JobForm';
 import Filters from './components/Filters';
 import JobCard from './components/JobCard';
 import toast from 'react-hot-toast'
+import ConfirmModal from './components/common/ConfirmModal';
 import './App.css';
 
 function App(){
@@ -24,6 +25,7 @@ function App(){
     salary: '',
     notes: ''
   });
+  
   
   useEffect(()=>{
     if (user) {  // ✅ Only load jobs if user is logged in

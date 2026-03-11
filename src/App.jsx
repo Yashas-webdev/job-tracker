@@ -99,16 +99,23 @@ function App(){
   window.scrollTo({top:0,behavior:'smooth'});
  };
 
- const handleDelete = (id) =>{
-  if(window.confirm('Are you sure you want to delete this job application?')){
-    setJobs(jobs.filter(job => job.id !== id));
+ const handleDelete = (id) => {
+  const job = jobs.find(j => j.id === id);
+  setJobToDelete(job);
+  setShowDeleteModal(true);
+};
 
-    toast.success(`Deleted ${jobToDelete.company} applicatoin`,{
+const confirmDelete = () => {
+  if (jobToDelete) {
+    setJobs(jobs.filter(job => job.id !== jobToDelete.id));
+    toast.success(`Deleted ${jobToDelete.company} application`, {
       duration: 3000,
-      icon:'🚮'
-    })
+      icon: '🗑️',
+    });
+    setJobToDelete(null);
   }
- };
+};
+
 
  const stats = {
   total: jobs.length,
@@ -190,9 +197,9 @@ return matchesFilter && matchesSearch;
             setJobToDelete(null);
           }}
 
-          onConfirm={confirmDelte}
+          onConfirm={confirmDelete}
           title = 'Delete Application'
-          message = {`Are you sure you want to delete the application for ${jobToDelete?.company || 'this company'}? This actiion cannot be undone.`}
+          message = {`Are you sure you want to delete the application for ${jobToDelete?.company || 'this company'}? This action cannot be undone.`}
           confirmText='Delete'
           cancelText='Cancel'
           type='danger'

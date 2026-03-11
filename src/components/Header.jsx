@@ -1,6 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import { useState, useRef, useEffect } from 'react';
-import ConfirmModal from '../common/confirmModal'
+import ConfirmModal from './common/ConfirmModal'
 import './Header.css';
 
 export default function Header() {
@@ -23,9 +23,13 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    setShowDropdown(false);
-    setShowLogoutModal(true);
-  };
+  setShowDropdown(false);
+  setShowLogoutModal(true);
+};
+
+const confirmLogout = () => {
+  logout();
+};
 
   const getInitials = (name) => {
     return name

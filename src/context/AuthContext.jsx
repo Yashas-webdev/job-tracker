@@ -76,7 +76,7 @@ const signIn = (email,password) =>{
     setUser(user);
 
     toast.success(`Welcome back, ${user.name}! 👋`,{
-        duration: 3000,
+        duration: 2000,
     })
     return user;
 };

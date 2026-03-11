@@ -117,3 +117,83 @@
     font-size: 1.5rem;
   }
 }
+
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .auth-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .auth-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .auth-form {
+    gap: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  .auth-button {
+    padding: 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .auth-switch {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 0.5rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .error-message {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .form-group input {
+    font-size: 0.9rem;
+    padding: 0.65rem;
+  }
+
+  .auth-button {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
